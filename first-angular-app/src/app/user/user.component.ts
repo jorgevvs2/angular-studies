@@ -1,15 +1,10 @@
 import { Component, computed, EventEmitter, Input, input, Output} from '@angular/core';
-import { DUMMY_USERS } from '../dummy-users';
-
-interface User {
-  id: string;
-  name: string;
-  avatar: string;
-}
+import { User } from './user.model';
+import { CardComponent } from "../shared/card/card.component";
 
 @Component({
   selector: 'app-user',
-  imports: [],
+  imports: [CardComponent],
   templateUrl: './user.component.html',
   styleUrl: './user.component.css'
 })
@@ -17,7 +12,7 @@ interface User {
 export class UserComponent {
   @Input({required: true}) user!: User
   @Output() onSelect = new EventEmitter<string>();
-
+  @Input({required: true}) isSelected!: boolean;
   get imagePath(){
     return 'assets/users/' + this.user.avatar;
   }
